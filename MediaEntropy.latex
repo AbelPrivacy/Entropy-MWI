@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Claude Shannon's Informational Entropy Applied to Computational Media}
+\author{Kyle McGrath}
+\date{July 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Calculate Claude Shannon’s informational entropy for an image using opencv to read an image into a cv:Mat (a $3\times n\times m$ matrix if a 3-dimensional color space is used (e.g. RGB), else a $4\times n\times m$ matrix if a 4-dimensional color space is used (e.g. RGB$\alpha$).
+
+\section{Images}
+Use C++ to implement a cython module (or just plain old fashioned cython). C++ compiled into bytecode might allow for a more easily portable implementation.
+
+Let $I=\{v_i|v_i\in[0,255]x[0,255]x[0,255]\}_{i=0}^{4096}$ be a $64\times 64$ image where each $v_i$ is a pixel represented by an 24-bit RGB value. Let $c_i$ be the number of times that $v_i$ appears in $I$. Then, $p(v_i)=\frac{c_i}{4096}$ is the probability of the color $v_i$ appearing in $I$. \\
+\,\\
+Recall, that the formula for Shannon's informational entropy is $$H(x)=-\sum_{x\in {\mathcal {X}}}p(x)\log_2p(x).$$ We thus calculate, 
+\begin{equation}
+\begin{split}
+H(I)&=-\sum_{v_i\in {\mathcal {I}}}p(v_i)\log_2p(v_i)\\
+    &=-\sum_{i=0}^{4096}\frac{c_i}{4096}\log_2\left(\frac{c_i}{4096}\right)
+\end{split}
+\end{equation}
+
+\section{Audio}
+
+To calculate the informational entropy of audio, we examine the signal in the frequency domain by applying the Fourier Transform. However, we must also examine the signal in the time domain, as audio exhibits entropy rhythmically as well as through pitch. We can combine these informational entropy values into a single value using averaging.
+
+
+%% ????
+
+
+
+\end{document}
